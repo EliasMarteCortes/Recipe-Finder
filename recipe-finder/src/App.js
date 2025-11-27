@@ -3,11 +3,17 @@ import './App.css';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(searchTerm);
+  };
+
   return (
     <div className="App">
       <h1>Recipe Finder</h1>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Search for recipes..."
