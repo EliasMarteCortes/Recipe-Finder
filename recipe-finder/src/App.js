@@ -13,7 +13,6 @@ function App() {
         `https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&apiKey=${API_KEY}`
       );
       const data = await response.json();
-      console.log(data);
       setRecipes(data.results);
     } catch (error) {
       console.error("Error fetching recipes:", error);
@@ -49,6 +48,7 @@ function App() {
         ) : (
           recipes.map((recipe) => (
             <div key={recipe.id} className="recipe-card">
+              <img src={recipe.image} alt={recipe.title} />
               <h2>{recipe.title}</h2>
             </div>
           ))
