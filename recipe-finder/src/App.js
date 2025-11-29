@@ -5,9 +5,28 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [recipes, setRecipes] = useState([]);
 
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
+  const fetchRecipes = async () => {
+    try {
+      const response = await fetch(
+        `https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&apiKey=${API_KEY}`
+      );
+      const data = await response.json();
+      console.log(data);
+      setRecipes(data.results);
+    } catch (error) {
+      console.error("Error fetching recipes:", error);
+      alert("Failed to fetch recipes. Please try again later.");
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(searchTerm);
+    if (searchTerm) {
+      fetchRecipes();
+    }
   };
 
   return (
