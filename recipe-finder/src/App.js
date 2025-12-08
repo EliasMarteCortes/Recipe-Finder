@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [recipes, setRecipes] = useState([]);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -41,6 +42,10 @@ function App() {
     }
   };
 
+  const handleRecipeClick = (id) => {
+    console.log('Recipe clicked:', id);
+  };
+
   return (
     <div className="App">
       <h1>Recipe Finder</h1>
@@ -61,7 +66,7 @@ function App() {
           <p>No recipes found. Try searching for something!</p>
         ) : (
           recipes.map((recipe) => (
-            <div key={recipe.id} className="recipe-card">
+            <div key={recipe.id} className="recipe-card" onClick={() => handleRecipeClick(recipe.id)}>
               <img src={recipe.image} alt={recipe.title} />
               <h2>{recipe.title}</h2>
             </div>
