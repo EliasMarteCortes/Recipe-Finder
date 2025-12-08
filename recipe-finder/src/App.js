@@ -20,6 +20,19 @@ function App() {
     }
   }
 
+  const fetchRandomRecipes = async () => {
+    try {
+      const response = await fetch(
+        `https://api.spoonacular.com/recipes/random?number=12&apiKey=${API_KEY}`
+      );
+      const data = await response.json();
+      setRecipes(data.recipes);
+    } catch (error) {
+      console.error("Error fetching random recipes:", error);
+      alert("Failed to fetch random recipes. Please try again later.");
+    }
+  }  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(searchTerm);
