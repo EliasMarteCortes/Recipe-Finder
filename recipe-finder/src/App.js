@@ -32,7 +32,20 @@ function App() {
       console.error("Error fetching random recipes:", error);
       alert("Failed to fetch random recipes. Please try again later.");
     }
-  }  
+  }
+
+  const fetchRecipeDetails = async (id) => {
+    try {
+      const response = await fetch(
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+      );
+      const data = await response.json();
+      setSelectedRecipe(data);
+    } catch (error) {
+      console.error("Error fetching recipe details:", error);
+      alert("Failed to fetch recipe details. Please try again later.");
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,7 +56,7 @@ function App() {
   };
 
   const handleRecipeClick = (id) => {
-    console.log('Recipe clicked:', id);
+    fetchRecipeDetails(id);
   };
 
   return (
