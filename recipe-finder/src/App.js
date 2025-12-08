@@ -53,6 +53,7 @@ function App() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <button type="submit">Search</button>
+        <button type="button" onClick={fetchRandomRecipes}>Get Random Recipes</button>
       </form>
 
       <div className="recipes">
