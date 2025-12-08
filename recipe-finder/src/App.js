@@ -59,6 +59,10 @@ function App() {
     fetchRecipeDetails(id);
   };
 
+  const closeModal = () => {
+    setSelectedRecipe(null);
+  };
+
   return (
     <div className="App">
       <h1>Recipe Finder</h1>
@@ -86,6 +90,36 @@ function App() {
           ))
         )}
       </div>
+      {selectedRecipe && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="close-btn" onClick={closeModal}>×</button>
+            <h2>{selectedRecipe.title}</h2>
+            <img src={selectedRecipe.image} alt={selectedRecipe.title} />
+            
+            <div className="recipe-details">
+              <h3>Ingredients:</h3>
+              <ul>
+                {selectedRecipe.extendedIngredients.map((ingredient, index) => (
+                  <li key={index}>{ingredient.original}</li>
+                ))}
+              </ul>
+
+              {selectedRecipe.instructions && (
+                <div>
+                  <h3>Instructions:</h3>
+                  <div dangerouslySetInnerHTML={{__html: selectedRecipe.instructions}} />
+                </div>
+              )}
+
+              <div className="recipe-info">
+                <p><strong>Ready in:</strong> {selectedRecipe.readyInMinutes} minutes</p>
+                <p><strong>Servings:</strong> {selectedRecipe.servings}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
