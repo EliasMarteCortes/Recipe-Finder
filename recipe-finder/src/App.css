@@ -44,6 +44,10 @@ form {
   margin-top: 20px;
 }
 
+.recipes p {
+  grid-column: 1 / -1;
+  text-align: center;}
+
 .recipe-card {
   border: 1px solid #dddddd;
   border-radius: 8px;
